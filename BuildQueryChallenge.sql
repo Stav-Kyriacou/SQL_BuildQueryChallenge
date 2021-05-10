@@ -102,8 +102,29 @@ INSERT INTO BOOKING
 (2,	        'West',	    'Jan',	    29,	        2016,	    225,	    '2015-12-17'),
 (3,	        'West',	    'Jan',	    29,	        2016,	    200,	    '2015-12-18');
 
-SELECT * FROM TOUR;
-SELECT * FROM CLIENT;
-SELECT * FROM EVENT;
-SELECT * FROM BOOKING;
+--Task 4
+--Query 1
+SELECT C.GivenName, C.Surname, B.TourName, T.Description, B.EventYear, B.EventMonth, B.EventDay, E.EventFee, B.DateBooked, B.Payment
+FROM BOOKING B
+INNER JOIN CLIENT C
+ON B.ClientID = C.ClientID
+
+INNER JOIN TOUR T
+ON B.TourName = T.TourName
+
+INNER JOIN EVENT E
+ON B.TourName = E.TourName
+AND B.EventYear = E.EventYear
+AND B.EventMonth = E.EventMonth
+AND B.EventDay = E.EventDay;
+
+--Query 2
+SELECT EventMonth, TourName, COUNT(*) AS 'Num Bookings'
+FROM BOOKING
+GROUP BY EventMonth, TourName;
+
+--Query 3
+SELECT *
+FROM BOOKING
+WHERE Payment > (SELECT AVG(Payment) FROM BOOKING);
 
