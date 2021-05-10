@@ -28,6 +28,7 @@ IF OBJECT_ID('TOUR') IS NOT NULL
     DROP TABLE TOUR;
 IF OBJECT_ID('CLIENT') IS NOT NULL
     DROP TABLE CLIENT;
+GO
 
 CREATE TABLE TOUR (
     TourName            NVARCHAR(100)
@@ -65,7 +66,7 @@ CREATE TABLE BOOKING (
 ,   FOREIGN KEY (ClientID) REFERENCES CLIENT(ClientID)
 ,   FOREIGN KEY (TourName, EventMonth, EventDay, EventYear) REFERENCES EVENT(TourName, EventMonth, EventDay, EventYear)
 );
-
+GO
 
 INSERT INTO TOUR 
 (TourName,  Description) VALUES
@@ -101,7 +102,7 @@ INSERT INTO BOOKING
 (3,	        'South',	'Jan',	    16,	        2016,	    200,	    '2016-01-09'),
 (2,	        'West',	    'Jan',	    29,	        2016,	    225,	    '2015-12-17'),
 (3,	        'West',	    'Jan',	    29,	        2016,	    200,	    '2015-12-18');
-
+GO
 --Task 4
 --Query 1
 SELECT C.GivenName, C.Surname, B.TourName, T.Description, B.EventYear, B.EventMonth, B.EventDay, E.EventFee, B.DateBooked, B.Payment
@@ -127,4 +128,17 @@ GROUP BY EventMonth, TourName;
 SELECT *
 FROM BOOKING
 WHERE Payment > (SELECT AVG(Payment) FROM BOOKING);
+
+GO
+--Task 5
+CREATE VIEW GreaterAvgPayment AS
+SELECT *
+FROM BOOKING
+WHERE Payment > (SELECT AVG(Payment) FROM BOOKING);
+
+GO
+
+SELECT *
+FROM GreaterAvgPayment
+
 
