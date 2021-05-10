@@ -145,7 +145,7 @@ FROM GreaterAvgPayment
 --Task 6
 
 --This just calculates and shows what the average payment is, can use the value for further testing purposes
-SELECT AVG(Payment)
+SELECT AVG(Payment) AS 'Average Payment'
 FROM BOOKING;
 
 --This query shows all the bookings that are greater than the average
