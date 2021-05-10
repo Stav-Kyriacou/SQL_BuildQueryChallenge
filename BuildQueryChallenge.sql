@@ -142,3 +142,15 @@ SELECT *
 FROM GreaterAvgPayment
 
 
+--Task 6
+
+--This just calculates and shows what the average payment is, can use the value for further testing purposes
+SELECT AVG(Payment)
+FROM BOOKING;
+
+--This query shows all the bookings that are greater than the average
+--Hard coding the average here makes it clearer what the results should be
+--This query returns 3 rows which is the same as what the view returns
+SELECT *
+FROM BOOKING
+WHERE Payment > 200;
